@@ -19,7 +19,7 @@
 Clone the repository and install dependencies:  
 
 ```bash
- https://github.com/bappaditya92/Readify.git
+https://github.com/bappaditya92/Readify.git
 cd readify  
 npm install  
 ```
