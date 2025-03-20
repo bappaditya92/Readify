@@ -2,6 +2,7 @@ import express from 'express';
 
 const app = express();
 
+
 //Routes
 //Http method : Get,POST,PUT,DELETE
 app.get('/', (req,res)=>{
