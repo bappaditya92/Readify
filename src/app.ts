@@ -1,6 +1,7 @@
-import express, { NextFunction } from 'express';
-import { HttpError } from 'http-errors';
+import express, { NextFunction, Request, Response} from 'express';
+import  { HttpError } from 'http-errors';
 import { config } from './config/config';
+
 
 const app = express();
 
@@ -8,13 +9,16 @@ const app = express();
 //Routes
 //Http method : Get,POST,PUT,DELETE
 app.get('/', (req,res)=>{
-    res.json({"sName": "Rahul", "dept": "Civil", "year": 2025})
+    // throw new error("something went wrong...")
+    const error = createHttpError(400, "someting went wrong")
+    throw error;
+    res.json({message: "welcome to elib api's"})
 })
 
 
 //global error handler
 
-app.use((err:HttpError,req:Request,res:Response,next:NextFunction)=>{
+app.use((err: HttpError,req:Request,res:Response,next:NextFunction)=>{
     const statusCode = err.statusCode || 500;
 
    return res.status(statusCode).json({
