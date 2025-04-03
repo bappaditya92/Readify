@@ -1,19 +1,22 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import globalErrorHandler from "./middlewares/globalErrorHandlers";
+
+import { config } from "./config/config";
 
 const app = express();
 
-//Routes
-//Http methods GET,POST,PUT,DELETE
-app.get("/home", (req, res, next) => {
+app.use(express.json());
+
+// Routes
+// Http methods: GET, POST, PUT, PATCH, DELETE
+app.get("/", (req, res, next) => {
   res.json({
-    name: "Bappaditya SInha",
+    name: "Bappaditya Sinha",
     hometown: "contai",
   });
 });
 
-//global error handler
+// Global error handler
+app.use(globalErrorHandler as unknown as express.ErrorRequestHandler);
 
-app.use(globalErrorHandler);
 export default app;
