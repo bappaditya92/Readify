@@ -7,7 +7,6 @@ import { config } from "./config/config";
 import userRoute from "./users/usersRoute";
 
 const app = express();
-
 app.use(express.json());
 
 // Routes
