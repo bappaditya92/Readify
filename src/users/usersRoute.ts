@@ -1,9 +1,8 @@
 import express from "express";
+import { createUser } from "./userController";
 
 const userRoute = express.Router();
 
-userRoute.post("/register", (req, res) => {
-  res.json({ message: "User created succesfully" });
-});
+userRoute.post("/register", createUser);
 
 export default userRoute;
