@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import userModel from "./userModel";
 import { sign } from "jsonwebtoken";
 import { config } from "../config/config";
+import { User } from "./userTypes";
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
   const { name, email, password } = req.body;
@@ -13,24 +14,36 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
     return next(error);
   }
   //Database call
-  const user = await userModel.findOne({ email });
-  if (user) {
-    const error = createHttpError(400, "User already exist with this email");
-    return next(error);
+  try {
+    const user = await userModel.findOne({ email });
+    if (user) {
+      const error = createHttpError(400, "User already exist with this email");
+      return next(error);
+    }
+  } catch (err) {
+    return next(createHttpError(500, "Error while getting the data"));
   }
-  //password --> hased
-  const hashedPassword = await bcrypt.hash(password, 10);
 
-  const newUser = await userModel.create({
-    name,
-    email,
-    password: hashedPassword,
-  });
-  //token generation (jwt)
+  //password --> hased
+  let newUser: User;
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    newUser = await userModel.create({
+      name,
+      email,
+      password: hashedPassword,
+    });
+    //token generation (jwt)
+  } catch (err) {
+    return next(createHttpError(500, "Error while creteated user"));
+  }
+
   const token = sign({ sub: newUser._id }, config.jwtSecret as string, {
     expiresIn: "7d",
+    algorithm: "HS256",
   });
-
   //Response
   res.json({ accessToken: token });
 };
