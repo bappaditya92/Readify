@@ -5,20 +5,19 @@ const userSchema = new mongoose.Schema<User>(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
     },
     email: {
       type: String,
-      require: true,
       unique: true,
+      required: true,
     },
     password: {
       type: String,
-      require: true,
+      required: true,
     },
   },
   { timestamps: true }
 );
 
-//users collection
 export default mongoose.model<User>("User", userSchema);
