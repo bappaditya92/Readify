@@ -5,6 +5,7 @@ import globalErrorHandler from "./middlewares/globalErrorHandlers";
 
 import { config } from "./config/config";
 import userRoute from "./users/usersRoute";
+import bookRouter from "./book/bookRouter";
 
 const app = express();
 app.use(express.json());
@@ -18,6 +19,7 @@ app.get("/home", (req, res, next) => {
   });
 });
 app.use("/api/users", userRoute);
+app.use("/api/books", bookRouter);
 
 // Global error handler
 app.use(globalErrorHandler as unknown as express.ErrorRequestHandler);
