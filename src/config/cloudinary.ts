@@ -1,11 +1,12 @@
 import { v2 as cloudinary } from "cloudinary";
+import { config } from "./config";
 
 (async function () {
   // Configuration
   cloudinary.config({
-    cloud_name: "xxxxxxxxxxx",
-    api_key: "xxxxxxxxxxxxxxxx",
-    api_secret: "<your_api_secret>",
+    cloud_name: config.cloudinaryCloud,
+    api_key: config.cloudinaryApiKey,
+    api_secret: config.cloudinarSecret, // Click 'View API Keys' above to copy your API secret
   });
 
   // // Upload an image
