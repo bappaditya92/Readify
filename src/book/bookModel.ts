@@ -1,31 +1,36 @@
 import mongoose from "mongoose";
 import { Book } from "./bookTypes";
 
-const booksSchema = new mongoose.Schema(
+const bookSchema = new mongoose.Schema<Book>(
   {
     title: {
+      type: String,
+      required: true,
+    },
+    description: {
       type: String,
       require: true,
     },
     author: {
       type: mongoose.Schema.Types.ObjectId,
-      require: true,
+      // add ref
+      ref: "User",
+      required: true,
     },
     coverImage: {
       type: String,
-      require: true,
+      required: true,
     },
     file: {
       type: String,
-      require: true,
+      requied: true,
     },
     genre: {
       type: String,
-      require: true,
+      required: true,
     },
   },
   { timestamps: true }
 );
 
-const booksModel = mongoose.model<Book>("Books", booksSchema);
-export default booksModel;
+export default mongoose.model<Book>("Book", bookSchema);
