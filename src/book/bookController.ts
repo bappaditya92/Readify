@@ -19,7 +19,7 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
     folder: "book-covers",
     format: coverImageMimeType,
   });
-  console.log("uploadresult", uploadResult);
+  // console.log("uploadresult", uploadResult);
 
   res.json({});
 };
