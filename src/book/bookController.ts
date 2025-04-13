@@ -64,4 +64,24 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export { createBook };
+const updateBook = async (req: Request, res: Response, next: NextFunction) => {
+  const { title, genre } = req.body;
+  const bookId = req.params.bookId;
+
+  const book = await bookModel.findOne({ _id: bookId });
+
+  if (!book) {
+    return next(createHttpError(404, "book not found"));
+    //return res.status(404).json({ messga: "Book not found" });
+  }
+  //check access
+  const _req = req as AuthRequest;
+  if (book.author.toString() != _req.userId) {
+    return next(createHttpError(403, "Unauthorized"));
+    //return res.status(403).json({ message: "Unauthorized" });
+  }
+
+  const completeCoverImage = "";
+};
+
+export { createBook, updateBook };
