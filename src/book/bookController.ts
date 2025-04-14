@@ -44,6 +44,8 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
         format: "pdf",
       }
     );
+    console.log(bookFileUploadResult);
+
     const _req = req as AuthRequest;
 
     const newBook = await bookModel.create({
