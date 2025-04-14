@@ -129,5 +129,4 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
   );
   res.json(updateBook);
 };
-
 export { createBook, updateBook };
