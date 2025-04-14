@@ -196,6 +196,6 @@ const deleteBook = async (req: Request, res: Response, next: NextFunction) => {
 
   await bookModel.deleteOne({ _id: bookId });
 
-  res.status(204).send("Book deleted");
+  return res.sendStatus(204);
 };
 export { createBook, updateBook, listBooks, getBookById, deleteBook };
