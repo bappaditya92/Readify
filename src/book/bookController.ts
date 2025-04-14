@@ -55,8 +55,6 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
       coverImage: uploadResult.secure_url,
       file: bookFileUploadResult.secure_url,
     });
-
-    //delete temporary file
     await fs.promises.unlink(filePath);
     await fs.promises.unlink(bookFilePath);
 
