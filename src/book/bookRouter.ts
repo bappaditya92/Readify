@@ -1,6 +1,12 @@
 import path from "node:path";
 import express from "express";
-import { createBook, listBooks, updateBook } from "./bookController";
+import {
+  createBook,
+  deleteBook,
+  getBookById,
+  listBooks,
+  updateBook,
+} from "./bookController";
 import multer from "multer";
 import authenticate from "../middlewares/authenticate";
 const bookRouter = express.Router();
@@ -36,5 +42,7 @@ bookRouter.put(
 );
 
 bookRouter.get("/", listBooks);
+bookRouter.get("/:bookId", getBookById);
+bookRouter.delete("/:bookId", authenticate, deleteBook);
 
 export default bookRouter;
